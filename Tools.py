@@ -11,7 +11,7 @@ cylindric: cylindric distribution along x-axis
 """
 
 
-class ToBeNamed:
+class PlacePoints:
     def __init__(self, filename, case, radius):
         self.radius = radius
         self.case = case
@@ -89,6 +89,20 @@ class ToBeNamed:
         points_to_check = 0
         nb_points_i = math.ceil(range_diff(self.range_i) / dx) + 1  # dx
         nb_points_j = math.ceil(range_diff(self.range_j) / dx) + 1  # dr
+
+        # calc points_to_check
+        for i in range(nb_points_i):
+            for j in range(nb_points_j):
+                if j != 0:
+                    radius = j*dx
+                    dphi = dx/radius
+                    nb_points_k = math.floor(2*math.pi/dphi) + 1
+                else:
+                    nb_points_k = 1
+                points_to_check += nb_points_k
+        print('\nNumber of points to check: ', points_to_check)
+
+        # check points
         for i in range(nb_points_i):
             for j in range(nb_points_j):
                 if j != 0:
@@ -99,7 +113,6 @@ class ToBeNamed:
                 else:
                     dphi = 0
                     nb_points_k = 1
-                points_to_check += nb_points_k
                 for k in range(nb_points_k):
                     px = self.range_i[0] + i * dx
                     py = math.cos(k*dphi) * j * dx
@@ -107,7 +120,6 @@ class ToBeNamed:
                     p = Point_3(px, py, pz)
                     if self.sideof.bounded_side(p) == ON_BOUNDED_SIDE or self.sideof.bounded_side(p) == ON_BOUNDARY:
                         self.points.append(p)
-        print('\nNumber of points to check: ', points_to_check)
         print('Number of points inside polyhedron: ', len(self.points))
 
     def hexagonal_densest(self):
