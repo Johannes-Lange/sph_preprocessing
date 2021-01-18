@@ -98,8 +98,9 @@ class PlacePoints:
         points_total = 0
         nb_points_i = math.ceil(range_diff(self.range_i) / dx) + 1  # dx
         nb_points_j = math.ceil(range_diff(self.range_j) / dx) + 1  # dr
+        # nb_points_k depends on radius (index j)
 
-        # calc points_to_check
+        # count points_to_check
         for i in range(nb_points_i):
             for j in range(nb_points_j):
                 if j != 0:
@@ -117,9 +118,9 @@ class PlacePoints:
             for j in range(nb_points_j):
                 if j != 0:
                     radius = j*dx
-                    dphi = dx/radius
+                    dphi = dx/radius  # exact dphi to place two points with distance dx
                     nb_points_k = math.floor(2*math.pi/dphi) + 1
-                    dphi = 2*math.pi/nb_points_k
+                    dphi = 2*math.pi/nb_points_k  # rounded dphi to fit integer nb_points on circumference
                 else:
                     dphi = 0
                     nb_points_k = 1
