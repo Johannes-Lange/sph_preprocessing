@@ -128,6 +128,7 @@ class PlacePoints:
                     px = self.range_i[0] + i * dx
                     py = math.cos(k*dphi) * j * dx
                     pz = math.sin(k*dphi) * j * dx
+
                     p = Point_3(px, py, pz)
                     if self.sideof.bounded_side(p) == ON_BOUNDED_SIDE or self.sideof.bounded_side(p) == ON_BOUNDARY:
                         self.points.append(p)
