@@ -104,9 +104,7 @@ class PlacePoints:
         for i in range(nb_points_i):
             for j in range(nb_points_j):
                 if j != 0:
-                    radius = j*dx
-                    dphi = dx/radius
-                    nb_points_k = math.floor(2*math.pi/dphi) + 1
+                    nb_points_k = math.floor(2 * math.pi * j) + 1
                 else:
                     nb_points_k = 1
                 points_total += nb_points_k
@@ -117,10 +115,8 @@ class PlacePoints:
         for i in range(nb_points_i):
             for j in range(nb_points_j):
                 if j != 0:
-                    radius = j*dx
-                    dphi = dx/radius  # exact dphi to place two points with distance dx
-                    nb_points_k = math.floor(2*math.pi/dphi) + 1
-                    dphi = 2*math.pi/nb_points_k  # rounded dphi to fit integer nb_points on circumference
+                    nb_points_k = math.floor(2*math.pi*j) + 1
+                    dphi = 2 * math.pi / nb_points_k
                 else:
                     dphi = 0
                     nb_points_k = 1
