@@ -126,3 +126,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.bunny.obj.icloud
+.bunny.off.icloud
+.DS_Store
+.Vortex_Tube.stl.icloud
+.DS_Store
